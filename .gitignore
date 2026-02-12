@@ -1,0 +1,21 @@
+# Environment Variables 
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Uploaded PDFs and extracted files (user data)
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+
+# IDE files
+.vscode/
+
+# OS files
+.DS_Store

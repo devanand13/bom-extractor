@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM Extractor - Upload & Convert</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 BOM Extractor</h1>
+            <p>Upload your Bill of Materials PDF and extract structured data</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div class="upload-section" id="uploadSection">
+            <div class="card">
+                <h2>Upload PDF</h2>
+                
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="fileInput" name="file" accept=".pdf" required>
+                        <label for="fileInput" class="file-upload-label">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <span id="fileName">Choose PDF file or drag & drop</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bomType">BOM Type:</label>
+                        <select id="bomType" name="bom_type">
+                            <option value="simple">Simple/Cost BOM</option>
+                            <option value="engineering">Engineering BOM</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="btn-text">Extract BOM Data</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10" stroke-width="4" fill="none"/>
+                            </svg>
+                            Processing...
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <div class="card">
+                <div class="results-header">
+                    <h2>Extraction Results</h2>
+                    <button class="btn btn-secondary" id="newUploadBtn">Upload Another File</button>
+                </div>
+
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalItems">-</div>
+                        <div class="stat-label">Total Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="bomTypeDisplay">-</div>
+                        <div class="stat-label">BOM Type</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="documentTitle">-</div>
+                        <div class="stat-label">Document</div>
+                    </div>
+                </div>
+
+                <div class="download-buttons">
+                    <button class="btn btn-download" id="downloadJson">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download JSON
+                    </button>
+                    <button class="btn btn-download" id="downloadCsv">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download CSV
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <h3>Extracted Items</h3>
+                    <div id="dataTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Section -->
+        <div class="error-section" id="errorSection" style="display: none;">
+            <div class="error-card">
+                <h3>⚠️ Error</h3>
+                <p id="errorMessage"></p>
+                <button class="btn btn-secondary" id="retryBtn">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
