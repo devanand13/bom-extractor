@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOM Extractor - Upload & Convert</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>📋 BOM Extractor</h1>
-            <p>Upload your Bill of Materials PDF and extract structured data</p>
+            <div class="header-wrapper">
+                <img src="{{ url_for('static', filename='images/codefusionlogo.png') }}" alt="Logo" class="logo">
+                <div class="header-center">
+                    <h1>📋 BOM Extractor</h1>
+                    <p>Upload your Bill of Materials PDF and extract structured data</p>
+                </div>
+            </div>
         </header>
 
         <!-- Upload Section -->

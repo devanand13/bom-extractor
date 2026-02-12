@@ -58,9 +58,29 @@ body::before {
 }
 
 header {
-    text-align: center;
     margin-bottom: 3rem;
     padding: 2rem 0;
+    position: relative;
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: -100px;      
+    top: -40px;       
+    height: 60px;
+    width: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+.header-center {
+    flex: 1;
+    text-align: center;
 }
 
 header h1 {
@@ -454,6 +474,16 @@ header p {
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
+    }
+
+    .header-wrapper {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .logo {
+        position: static;
+        margin-bottom: 1rem;
     }
 
     header h1 {
